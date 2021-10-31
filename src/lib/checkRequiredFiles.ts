@@ -9,13 +9,12 @@ export function checkRequiredFiles() {
 
 	if (config.analytics === true) {
 		try {
-			Deno.readTextFileSync('./data/analytics.csv');
+			if (Deno.readTextFileSync('./data/analytics.csv') === '')
+				throw new Error();
 		} catch {
-			Deno.writeFileSync(
+			Deno.writeTextFile(
 				'./data/analytics.csv',
-				new TextEncoder().encode(
-					'unix_time_secs, interaction_type, interaction_name'
-				)
+				'unix_time_secs, interaction_type, interaction_name'
 			);
 		}
 	}

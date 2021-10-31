@@ -11,6 +11,7 @@ initDatabase();
 
 import { handleApplicationCommand } from './handlers/command.ts';
 import { handleComponentInteraction } from './handlers/component.ts';
+import { logAnalytics } from './lib/logAnalytics.ts';
 
 const config = JSON.parse(Deno.readTextFileSync('./config.json'));
 
@@ -37,7 +38,7 @@ app.use(async function (ctx) {
 		return;
 	}
 
-	console.log({ interaction });
+	logAnalytics(interaction);
 
 	switch (interaction.type) {
 		case gateWayTypes.InteractionType.Ping: {
