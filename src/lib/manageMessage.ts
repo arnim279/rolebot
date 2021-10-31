@@ -3,16 +3,23 @@ import { config } from '../index.ts';
 import * as restAPITypes from 'https://deno.land/x/discord_api_types@0.24.0/rest/v9/mod.ts';
 
 export async function updateMessage(server_id: string, channel_id: string) {
-	const { message_id } =
-		getJSONFromSQLQuery<{ message_id: string }>(
+	let { message_id } =
+		getJSONFromSQLQuery<{ message_id: bigint | string }>(
 			'SELECT message_id FROM messages WHERE server_id = ? AND channel_id = ?',
 			[server_id, channel_id]
 		)[0] || {};
+
+	message_id = String(message_id); // is stored as bigint
 
 	const roles = getJSONFromSQLQuery<{ role_id: string; role_name: string }>(
 		'SELECT role_id, role_name FROM roles WHERE server_id = ?',
 		[server_id]
 	);
+
+	if (roles.length === 0) {
+		deleteMessage(server_id, channel_id);
+		return;
+	}
 
 	const message: restAPITypes.RESTPostAPIChannelMessageJSONBody = {
 		content: 'select your roles:',
@@ -33,7 +40,7 @@ export async function updateMessage(server_id: string, channel_id: string) {
 			})),
 	};
 
-	if (!message_id) {
+	if (message_id === 'undefined') {
 		const { id: message_id } = (await fetch(
 			`https://discord.com/api/v9/channels/${channel_id}/messages`,
 			{
@@ -45,11 +52,16 @@ export async function updateMessage(server_id: string, channel_id: string) {
 				body: JSON.stringify(message),
 			}
 		).then(r => r.json())) as restAPITypes.RESTGetAPIChannelMessageResult;
+
+		db.query(
+			'INSERT INTO messages (server_id, channel_id, message_id) VALUES (?, ?, ?);',
+			[server_id, channel_id, message_id]
+		);
 	} else {
 		await fetch(
 			`https://discord.com/api/v9/channels/${channel_id}/messages/${message_id}`,
 			{
-				method: 'PUT',
+				method: 'PATCH',
 				headers: {
 					'content-type': 'application/json',
 					'authorization': `Bot ${config.botToken}`,
