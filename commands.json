@@ -38,19 +38,6 @@
 			},
 			{
 				"type": 1,
-				"name": "set-channel",
-				"description": "set the channel where members can select their roles",
-				"options": [
-					{
-						"type": 7,
-						"name": "channel",
-						"description": "channel where members can select their roles",
-						"required": true
-					}
-				]
-			},
-			{
-				"type": 1,
 				"name": "invite",
 				"description": "invite me into your own server",
 				"options": []

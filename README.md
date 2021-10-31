@@ -14,6 +14,7 @@ you need to create the config file since it isn't tracked with git.
 ```js
 {
   "applicationKey": string, // your bot's public application key
+  "botToken": string, // your bot's secret token
   "analytics": boolean // whether analytics should be stored
 }
 ```

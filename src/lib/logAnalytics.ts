@@ -10,7 +10,7 @@ export async function logAnalytics(interaction: any) {
 				`${interaction.data?.name || ''} ${
 					interaction.data?.options?.[0]?.name || ''
 				}`,
-			].join(', '),
+			].join(','),
 		{ append: true }
 	);
 
