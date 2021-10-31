@@ -22,7 +22,7 @@ you need to create the config file since it isn't tracked with git.
 ### serving
 
 ```bash
-docker compose up
+docker compose up -d
 ```
 
 ### license

@@ -39,7 +39,7 @@
 			{
 				"type": 1,
 				"name": "invite",
-				"description": "invite me into your own server",
+				"description": "add me to your own server",
 				"options": []
 			}
 		]

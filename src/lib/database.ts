@@ -26,10 +26,6 @@ export function initDatabase() {
 	`);
 }
 
-export function query(query: string) {
-	db.query(query);
-}
-
 export function getJSONFromSQLQuery<type>(
 	query: string,
 	values: QueryParam[] = []
