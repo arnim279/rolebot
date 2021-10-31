@@ -8,11 +8,9 @@ USER deno
 COPY src src
 RUN deno cache src/index.ts
 
-COPY secrets.json .
+COPY config.json .
 VOLUME [ "data" ]
 
 EXPOSE 4000
 
-CMD [ "ls" ]
-
-#CMD [ "deno", "run", "--allow-net", "--allow-read", "--allow-write", "src/index.ts" ]
+CMD [ "deno", "run", "--allow-net", "--allow-read", "--allow-write", "src/index.ts" ]
