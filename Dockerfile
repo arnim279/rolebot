@@ -9,7 +9,6 @@ COPY src src
 RUN deno cache src/index.ts
 
 COPY config.json .
-VOLUME [ "data" ]
 
 EXPOSE 4000
 
