@@ -5,10 +5,7 @@
 a simple discord bot that allows members of your server to select their roles.  
 [invite to your server](https://discord.com/api/oauth2/authorize?client_id=904084390445977662&permissions=2048&scope=bot%20applications.commands)
 
-<video controls="controls">
-  <source type="video/mp4" src="./assets/showcase.mp4" />
-  <p>Your browser does not support the video element.</p>
-</video>
+[showcase](./assets/preview.mp4)
 
 ### important files
 
