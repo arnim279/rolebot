@@ -5,8 +5,6 @@
 a simple discord bot that allows members of your server to select their roles.  
 [invite to your server](https://discord.com/api/oauth2/authorize?client_id=904084390445977662&permissions=2048&scope=bot%20applications.commands)
 
-[showcase](./assets/preview.mp4)
-
 ### important files
 
 [`commands.json`](./commands.json): application commands  
