@@ -2,9 +2,6 @@ FROM denoland/deno:1.14.1
 
 WORKDIR /app
 
-# Prefer not to run as root.
-USER deno
-
 COPY src src
 RUN deno cache src/index.ts
 
